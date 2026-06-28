@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Schools Exhibition - Gurugram</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    background: #1a1a2e;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: flex; flex-direction: column; align-items: center;
+    font-size: 9px; font-weight: 700; color: #4b2d8f; line-height: 1.2;
+  }
+  .nav-logo span:first-child { font-size: 7px; color: #888; }
+  .nav-logo .brand { color: #4b2d8f; font-size: 11px; }
+  .nav-logo .sub { color: #e53935; font-size: 8px; letter-spacing: 1px; }
+  .register-btn {
+    background: transparent;
+    border: 1.5px solid #fff;
+    color: #fff;
+    padding: 7px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex; align-items: center; gap: 6px;
+    transition: background 0.2s;
+  }
+  .register-btn:hover { background: rgba(255,255,255,0.1); }
+  .register-btn::after { content: '→'; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #2d1b69 0%, #4b2d8f 40%, #6a3bbf 70%, #9c6dd9 100%);
+    padding: 30px 20px 50px;
+    display: flex; flex-wrap: wrap; gap: 20px;
+    position: relative; min-height: 320px;
+  }
+  .hero-left { flex: 1; min-width: 220px; }
+  .hero-left h1 {
+    color: #f5c842;
+    font-size: 28px; font-weight: 800; line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .hero-left h1 span { color: #fff; }
+  .hero-subtitle {
+    color: #ccc; font-size: 11px; letter-spacing: 2px;
+    margin-bottom: 18px; text-transform: uppercase;
+  }
+  .location-badge {
+    display: inline-flex; align-items: center; gap: 0;
+    background: #f5c842;
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: 12px; font-weight: 600;
+  }
+  .location-badge .loc {
+    background: #f5c842; color: #222;
+    padding: 8px 14px;
+    border-radius: 30px 0 0 30px;
+  }
+  .location-badge .date {
+    background: #e8b800; color: #222;
+    padding: 8px 14px;
+    border-radius: 0 30px 30px 0;
+  }
+
+  /* Hero children photos */
+  .hero-photos {
+    display: flex; align-items: flex-end; gap: 10px;
+    flex: 1; min-width: 200px; justify-content: center;
+  }
+  .photo-oval {
+    width: 80px; height: 120px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.3);
+    background: #7c5cbf;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-oval.big { width: 95px; height: 140px; }
+  .photo-oval svg { width: 60%; height: 60%; fill: rgba(255,255,255,0.5); }
+  .photo-oval img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Enquire form */
+  .enquire-form {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 16px;
+    min-width: 220px; flex: 0 0 220px;
+  }
+  .enquire-form h3 {
+    color: #fff; font-size: 14px; margin-bottom: 12px;
+  }
+  .enquire-form input, .enquire-form select {
+    width: 100%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 9px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    outline: none;
+  }
+  .enquire-form input::placeholder { color: rgba(255,255,255,0.6); }
+  .enquire-form select option { color: #222; }
+  .submit-btn {
+    background: #4b2d8f;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: #3a1f6e; }
+  .submit-btn::before { content: '↗'; font-size: 14px; }
+
+  /* Scroll strip at bottom of hero */
+  .scroll-strip {
+    position: absolute; bottom: -28px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 10px; overflow: hidden;
+  }
+  .scroll-oval {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #9c6dd9;
+    border: 3px solid #fff;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .scroll-oval svg { width: 55%; fill: rgba(255,255,255,0.6); }
+
+  /* STATS */
+  .stats {
+    margin-top: 50px;
+    display: flex; justify-content: center; gap: 0;
+    flex-wrap: wrap; padding: 20px 0 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .stat-item {
+    text-align: center; padding: 10px 30px;
+    border-right: 1px solid #ddd;
+    position: relative;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-badge {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .stat-badge .wreath {
+    font-size: 24px; color: #c9a84c;
+    line-height: 1;
+    position: relative;
+  }
+  .stat-badge .num {
+    font-size: 18px; font-weight: 700; color: #222;
+    margin-top: -4px;
+  }
+  .stat-badge .label {
+    font-size: 11px; color: #555; margin-top: 2px; line-height: 1.3;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    text-align: center;
+    font-size: 20px; font-weight: 700;
+    margin: 30px 0 18px;
+    color: #1a1a2e;
+  }
+
+  /* PARTICIPATING SCHOOLS LOGOS */
+  .logos-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 10px; padding: 0 16px 30px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .logo-box {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px 8px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 56px;
+    background: #fff;
+  }
+  .logo-box img { max-width: 80%; max-height: 36px; object-fit: contain; }
+  .logo-placeholder {
+    font-size: 9px; color: #888; text-align: center; font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* SCHOOL CATEGORIES */
+  .choose-section { padding: 10px 16px 30px; background: #f9f9fb; }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; max-width: 900px; margin: 0 auto;
+  }
+  .school-card {
+    border-radius: 8px; overflow: hidden;
+    position: relative; cursor: pointer;
+    min-height: 180px;
+    background: #bbb;
+  }
+  .school-card .card-img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .card-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding: 40px 12px 14px;
+    color: #fff;
+  }
+  .card-overlay h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .card-overlay p { font-size: 10px; color: rgba(255,255,255,0.8); line-height: 1.4; }
+  .card-bg-1 { background: linear-gradient(135deg, #5c8a6e, #8ab4a0); }
+  .card-bg-2 { background: linear-gradient(135deg, #7a6fa0, #b0a8cc); }
+  .card-bg-3 { background: linear-gradient(135deg, #6a8ca0, #a8c4d0); }
+  .card-bg-4 { background: linear-gradient(135deg, #8c7a6a, #c4b4a8); }
+
+  /* Child SVG icons in cards */
+  .card-icon { font-size: 50px; text-align: center; padding-top: 30px; opacity: 0.4; }
+
+  /* PRE-SCHEDULE BANNER */
+  .preschedule-banner {
+    background: linear-gradient(135deg, #e8e4f8 0%, #d4ccf0 100%);
+    display: flex; align-items: stretch;
+    min-height: 260px; position: relative; overflow: hidden;
+    margin: 0;
+  }
+  .preschedule-left {
+    flex: 1; padding: 40px 30px;
+    display: flex; flex-direction: column; justify-content: center;
+    z-index: 2;
+  }
+  .preschedule-left .eyebrow {
+    font-style: italic;
+    color: #7c5cbf; font-size: 14px; margin-bottom: 10px;
+  }
+  .preschedule-left h2 {
+    font-size: 26px; font-weight: 800;
+    color: #1a1a2e; line-height: 1.2; margin-bottom: 8px;
+  }
+  .preschedule-left .avoid {
+    font-style: italic; color: #7c5cbf;
+    font-size: 14px; margin-bottom: 20px;
+  }
+  .preschedule-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 12px; font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .preschedule-btn:hover { background: #4b2d8f; }
+  .preschedule-btn::before { content: '↗'; }
+  .preschedule-right {
+    flex: 1.2;
+    background: url('') center/cover;
+    position: relative; min-height: 260px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .people-illustration {
+    width: 100%; height: 260px;
+    background: linear-gradient(135deg, #c9b8f0, #a08ce0);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .people-illustration .people-svg {
+    opacity: 0.6; font-size: 80px;
+  }
+
+  /* WHAT MAKES section */
+  .mustvisit-section {
+    background: #1a1a2e;
+    padding: 30px 16px 40px;
+  }
+  .mustvisit-section .section-title { color: #fff; }
+  .features-strip {
+    display: flex; gap: 14px; overflow-x: auto;
+    padding-bottom: 10px; scroll-snap-type: x mandatory;
+    max-width: 960px; margin: 0 auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .features-strip::-webkit-scrollbar { height: 4px; }
+  .features-strip::-webkit-scrollbar-thumb { background: #4b2d8f; border-radius: 2px; }
+  .feature-card {
+    flex: 0 0 200px; scroll-snap-align: start;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 20px 16px;
+    color: #fff;
+  }
+  .feature-card .feat-icon {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px; font-size: 18px;
+  }
+  .feature-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+  /* Carousel arrows */
+  .carousel-arrows {
+    display: flex; justify-content: center; gap: 12px; margin-top: 20px;
+  }
+  .arrow-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    background: transparent;
+    color: #fff; font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .arrow-btn:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  /* FOOTER */
+  footer {
+    background: #12102a;
+    padding: 24px 20px;
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+  }
+  .footer-inner {
+    display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;
+    max-width: 960px; margin: 0 auto;
+  }
+  .footer-logo {
+    background: rgba(255,255,255,0.08);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 10px; font-weight: 700; color: #a090e0;
+    line-height: 1.4; text-align: center;
+    flex-shrink: 0;
+  }
+  .footer-addr { flex: 1; min-width: 140px; }
+  .footer-addr strong { display: block; color: #fff; font-size: 11px; margin-bottom: 4px; }
+  .footer-contact { flex: 1; min-width: 120px; }
+  .footer-contact strong { display: block; color: #fff; font-size: 11px; margin-bottom: 4px; }
+  .footer-social { display: flex; gap: 10px; align-items: center; }
+  .social-icon {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .social-icon:hover { background: rgba(255,255,255,0.25); }
+
+  /* Utility */
+  .divider { border: none; border-top: 1px solid #eee; margin: 0; }
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .logos-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero { flex-direction: column; }
+    .hero-photos { display: none; }
+    .enquire-form { flex: 1 1 100%; }
+    .stat-item { padding: 10px 15px; }
+    .preschedule-banner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span>Figma</span>
+    <span class="brand">Premier<br>Schools</span>
+    <span class="sub">Exhibition</span>
+  </div>
+  <button class="register-btn">Register Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1>Discover Gurugram's<br><span>Top 30+ Schools</span></h1>
+    <p class="hero-subtitle">All in one place</p>
+    <div class="location-badge">
+      <span class="loc">📍 Apparel House,<br>Sec 44, Gurugram</span>
+      <span class="date">🗓 2-3 August 2025<br>Sat-Sun | 10AM - 6PM</span>
+    </div>
+  </div>
+
+  <!-- Children photos -->
+  <div class="hero-photos">
+    <div class="photo-oval">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </div>
+    <div class="photo-oval big">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </div>
+    <div class="photo-oval">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </div>
+  </div>
+
+  <!-- Enquire Form -->
+  <div class="enquire-form">
+    <h3>Enquire Now</h3>
+    <input type="text" placeholder="Parent's Name">
+    <input type="tel" placeholder="Phone number">
+    <select>
+      <option value="" disabled selected>Which grade are you looking for?</option>
+      <option>Pre-School / Nursery</option>
+      <option>Class 1-5</option>
+      <option>Class 6-8</option>
+      <option>Class 9-12</option>
+    </select>
+    <button class="submit-btn">SUBMIT</button>
+  </div>
+
+  <!-- Scroll strip avatars -->
+  <div class="scroll-strip">
+    <div class="scroll-oval"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+    <div class="scroll-oval"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+    <div class="scroll-oval"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+    <div class="scroll-oval"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+    <div class="scroll-oval"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-badge">
+      <div class="wreath">🏅</div>
+      <div class="num">Trusted by<br><strong>1 Million+</strong></div>
+      <div class="label">Parents</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge">
+      <div class="wreath">🏅</div>
+      <div class="num"><strong>22+</strong></div>
+      <div class="label">Years<br>of Legacy</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge">
+      <div class="wreath">🏅</div>
+      <div class="num"><strong>500+</strong></div>
+      <div class="label">Participating<br>Schools</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge">
+      <div class="wreath">🏅</div>
+      <div class="num"><strong>17 Cities</strong></div>
+      <div class="label">Across the<br>Globe</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTICIPATING SCHOOLS -->
+<h2 class="section-title">Participating Schools</h2>
+<div class="logos-grid">
+  <!-- Row 1 -->
+  <div class="logo-box"><span class="logo-placeholder" style="color:#1a3a6e;font-weight:800;">H</span></div>
+  <div class="logo-box"><span class="logo-placeholder">SHREWSBURY<br>INTERNATIONAL<br>SCHOOL</span></div>
+  <div class="logo-box"><span class="logo-placeholder" style="color:#c00;">King's College<br>India</span></div>
+  <div class="logo-box"><span class="logo-placeholder">🌳</span></div>
+  <div class="logo-box"><span class="logo-placeholder">⬡</span></div>
+  <div class="logo-box"><span class="logo-placeholder" style="color:#003399;">⚔</span></div>
+  <!-- Row 2 (repeat) -->
+  <div class="logo-box"><span class="logo-placeholder" style="color:#1a3a6e;font-weight:800;">H</span></div>
+  <div class="logo-box"><span class="logo-placeholder">SHREWSBURY<br>INTERNATIONAL<br>SCHOOL</span></div>
+  <div class="logo-box"><span class="logo-placeholder" style="color:#c00;">King's College<br>India</span></div>
+  <div class="logo-box"><span class="logo-placeholder">🌳</span></div>
+  <div class="logo-box"><span class="logo-placeholder">⬡</span></div>
+  <div class="logo-box"><span class="logo-placeholder" style="color:#003399;">⚔</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- CHOOSE SCHOOL -->
+<section class="choose-section">
+  <h2 class="section-title">Choose the School That Fits You Best</h2>
+  <div class="cards-grid">
+    <div class="school-card card-bg-1">
+      <div class="card-icon">🎒</div>
+      <div class="card-overlay">
+        <h4>Pre-Schools &amp; Early Learning Centres</h4>
+        <p>Nurturing foundational skills for toddlers and pre-primary children.</p>
+      </div>
+    </div>
+    <div class="school-card card-bg-2">
+      <div class="card-icon">📚</div>
+      <div class="card-overlay">
+        <h4>K–12 CBSE Day Schools</h4>
+        <p>Reputed schools offering complete schooling from Kindergarten to Grade 12.</p>
+      </div>
+    </div>
+    <div class="school-card card-bg-3">
+      <div class="card-icon">🏛</div>
+      <div class="card-overlay">
+        <h4>Heritage to New Age Schools</h4>
+        <p>Time-tested schools to innovative pedagogy, tech enabled, future-ready schools.</p>
+      </div>
+    </div>
+    <div class="school-card card-bg-4">
+      <div class="card-icon">🌍</div>
+      <div class="card-overlay">
+        <h4>International Curriculum Schools</h4>
+        <p>Offering IB, Cambridge, Finnish and other global curricula with a global learning environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRE-SCHEDULE BANNER -->
+<div class="preschedule-banner">
+  <div class="preschedule-left">
+    <p class="eyebrow">Exciting Opportunities for Parents!</p>
+    <h2>Pre-schedule Your<br>School Appointments</h2>
+    <p class="avoid">To Avoid Rush</p>
+    <a class="preschedule-btn">PRE-SCHEDULE NOW</a>
+  </div>
+  <div class="preschedule-right">
+    <div class="people-illustration">
+      <span class="people-svg">👥</span>
+      <!-- Decorative people shapes -->
+      <svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+        <ellipse cx="200" cy="200" rx="300" ry="200" fill="#fff"/>
+        <circle cx="120" cy="100" r="50" fill="#9c6dd9"/>
+        <circle cx="250" cy="80" r="40" fill="#7c5cbf"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT MAKES THIS A MUST-VISIT -->
+<section class="mustvisit-section">
+  <h2 class="section-title">What Makes This Exhibition a Must-Visit</h2>
+  <div class="features-strip" id="featuresStrip">
+    <div class="feature-card">
+      <div class="feat-icon">👤</div>
+      <h4>Interact Directly with School Heads</h4>
+      <p>Get answers straight from the experts</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">📋</div>
+      <h4>Compare Curriculum &amp; Pedagogy</h4>
+      <p>Understand the differences between CBSE, ICSE, IB, Cambridge, Finnish &amp; more</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🎁</div>
+      <h4>Get Exclusive Fee Structures &amp; Offers</h4>
+      <p>Access transparent information and avail offers</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🔍</div>
+      <h4>Explore Schools Offerings</h4>
+      <p>Preview infrastructure, co-curricular, teaching methodology and culture</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🎓</div>
+      <h4>On-the-Spot Counselling</h4>
+      <p>Save time on admissions, application forms, and get expert guidance</p>
+    </div>
+  </div>
+  <div class="carousel-arrows">
+    <button class="arrow-btn" id="prevBtn">←</button>
+    <button class="arrow-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      Premier<br>Schools<br><span style="color:#e53935;font-size:9px;letter-spacing:1px;">Exhibition</span>
+    </div>
+    <div class="footer-addr">
+      <strong>📍 Corporate Office:</strong>
+      Suite B-5, Ballygunge Park Tower,<br>
+      67B Ballygunge Circular Road,<br>
+      Kolkata - 700019
+    </div>
+    <div class="footer-addr">
+      <strong>📍 Ahmedabad Office:</strong>
+      12/AA, Swastik Chambers, Near CU<br>
+      Shah College, Ashram Road,<br>
+      Ahmedabad - 380009
+    </div>
+    <div class="footer-contact">
+      <strong>📞 Call us on</strong>
+      9674805912<br>
+      9674585012
+    </div>
+    <div>
+      <strong style="color:#fff;display:block;font-size:11px;margin-bottom:8px;">Follow us</strong>
+      <div class="footer-social">
+        <a class="social-icon" href="#">📷</a>
+        <a class="social-icon" href="#">📘</a>
+        <a class="social-icon" href="#">▶</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Register button
+  document.querySelector('.register-btn').addEventListener('click', function() {
+    alert('Registration coming soon!');
+  });
+
+  // Submit button
+  document.querySelector('.submit-btn').addEventListener('click', function() {
+    const name = document.querySelectorAll('.enquire-form input')[0].value;
+    const phone = document.querySelectorAll('.enquire-form input')[1].value;
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+    alert('Thank you, ' + name + '! We will contact you shortly.');
+  });
+
+  // Pre-schedule button
+  document.querySelector('.preschedule-btn').addEventListener('click', function() {
+    alert('Pre-scheduling portal opening soon!');
+  });
+
+  // Carousel
+  const strip = document.getElementById('featuresStrip');
+  const cardW = 214; // 200 + 14 gap
+
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    strip.scrollBy({ left: cardW, behavior: 'smooth' });
+  });
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    strip.scrollBy({ left: -cardW, behavior: 'smooth' });
+  });
+
+  // Scroll strip animation
+  const scrollOvals = document.querySelector('.scroll-strip');
+  let offset = 0;
+  setInterval(() => {
+    offset = (offset + 1) % 60;
+    scrollOvals.style.transform = `translateX(-${offset}px)`;
+  }, 50);
+</script>
+</body>
+</html>
